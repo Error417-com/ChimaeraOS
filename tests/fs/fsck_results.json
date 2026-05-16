@@ -1,0 +1,146 @@
+{
+  "total": 6,
+  "passed": 6,
+  "failed": 0,
+  "overall_pass": true,
+  "scenarios": [
+    {
+      "id": "C0",
+      "name": "Clean disk (baseline)",
+      "kernel_tests_passed": 1,
+      "kernel_tests_failed": 0,
+      "kernel_done": true,
+      "fsck_clean": true,
+      "fsck_output": "Clean",
+      "serial_log": [
+        "[FSCKTEST] ChimeraOS FSCK test kernel starting",
+        "[ATA] Slave disk detected",
+        "[FSCK] Starting ChimeraFS consistency check...",
+        "[FSCK] 0 error(s): FAT_mismatch=0 orphan_clus=0 crosslink=0 bad_entry=0 orphan_lfn=0",
+        "[FSCK] 0 errors \ufffd\ufffd\ufffd filesystem is clean",
+        "[FSCKTEST] Filesystem mounted",
+        "[FSCKTEST] Corruption type: 0",
+        "[FSCKTEST] PASS C0 Clean disk: filesystem mounted successfully",
+        "[FSCKTEST] Tests: passed=1 failed=0",
+        "[FSCKTEST] DONE"
+      ],
+      "overall_pass": true
+    },
+    {
+      "id": "C1",
+      "name": "FAT table mismatch",
+      "kernel_tests_passed": 1,
+      "kernel_tests_failed": 0,
+      "kernel_done": true,
+      "fsck_clean": true,
+      "fsck_output": "Clean",
+      "serial_log": [
+        "[FSCKTEST] ChimeraOS FSCK test kernel starting",
+        "[ATA] Slave disk detected",
+        "[FSCK] Starting ChimeraFS consistency check...",
+        "[FSCK] 0 error(s): FAT_mismatch=0 orphan_clus=0 crosslink=0 bad_entry=0 orphan_lfn=0",
+        "[FSCK] 0 errors \ufffd\ufffd\ufffd filesystem is clean",
+        "[FSCKTEST] Filesystem mounted",
+        "[FSCKTEST] Corruption type: 1",
+        "[FSCKTEST] PASS C1 FAT mismatch repaired: testfile.txt readable",
+        "[FSCKTEST] Tests: passed=1 failed=0",
+        "[FSCKTEST] DONE"
+      ],
+      "overall_pass": true
+    },
+    {
+      "id": "C2",
+      "name": "Orphaned cluster chain",
+      "kernel_tests_passed": 2,
+      "kernel_tests_failed": 0,
+      "kernel_done": true,
+      "fsck_clean": true,
+      "fsck_output": "Clean",
+      "serial_log": [
+        "[FSCKTEST] ChimeraOS FSCK test kernel starting",
+        "[ATA] Slave disk detected",
+        "[FSCK] Starting ChimeraFS consistency check...",
+        "[FSCK] C2: orphaned chain starting at cluster 0x00000004",
+        "[FSCK] 1 error(s): FAT_mismatch=0 orphan_clus=1 crosslink=0 bad_entry=0 orphan_lfn=0",
+        "[FSCK] Repair summary: rescued=1 failures=0",
+        "[FSCKTEST] Filesystem mounted",
+        "[FSCKTEST] Corruption type: 2",
+        "[FSCKTEST] PASS C2a Orphaned cluster: /lost+found exists",
+        "[FSCKTEST] PASS C2b Orphaned cluster: rescued file in /lost+found",
+        "[FSCKTEST] Tests: passed=2 failed=0",
+        "[FSCKTEST] DONE"
+      ],
+      "overall_pass": true
+    },
+    {
+      "id": "C3",
+      "name": "Cross-linked files",
+      "kernel_tests_passed": 2,
+      "kernel_tests_failed": 0,
+      "kernel_done": true,
+      "fsck_clean": true,
+      "fsck_output": "Clean",
+      "serial_log": [
+        "[FSCKTEST] ChimeraOS FSCK test kernel starting",
+        "[ATA] Slave disk detected",
+        "[FSCK] Starting ChimeraFS consistency check...",
+        "[FSCK] C3: cross-link at cluster 0x00000003 (second ref from dir=0x00000002)",
+        "[FSCK] C2: orphaned chain starting at cluster 0x00000004",
+        "[FSCK] 2 error(s): FAT_mismatch=0 orphan_clus=1 crosslink=1 bad_entry=0 orphan_lfn=0",
+        "[FSCK] Repair summary: rescued=1 failures=0",
+        "[FSCKTEST] Filesystem mounted",
+        "[FSCKTEST] Corruption type: 3",
+        "[FSCKTEST] PASS C3a Cross-link: file_a.txt still exists",
+        "[FSCKTEST] PASS C3b Cross-link: file_b.txt still exists",
+        "[FSCKTEST] Tests: passed=2 failed=0",
+        "[FSCKTEST] DONE"
+      ],
+      "overall_pass": true
+    },
+    {
+      "id": "C4",
+      "name": "Invalid directory entry (attr=0xFF)",
+      "kernel_tests_passed": 1,
+      "kernel_tests_failed": 0,
+      "kernel_done": true,
+      "fsck_clean": true,
+      "fsck_output": "Clean",
+      "serial_log": [
+        "[FSCKTEST] ChimeraOS FSCK test kernel starting",
+        "[ATA] Slave disk detected",
+        "[FSCK] Starting ChimeraFS consistency check...",
+        "[FSCK] C4: invalid attr 0x000000ff at entry 4 in cluster 2",
+        "[FSCK] 1 error(s): FAT_mismatch=0 orphan_clus=0 crosslink=0 bad_entry=1 orphan_lfn=0",
+        "[FSCK] Repair summary: rescued=0 failures=0",
+        "[FSCKTEST] Filesystem mounted",
+        "[FSCKTEST] Corruption type: 4",
+        "[FSCKTEST] PASS C4 Invalid entry: goodfile.txt readable after repair",
+        "[FSCKTEST] Tests: passed=1 failed=0",
+        "[FSCKTEST] DONE"
+      ],
+      "overall_pass": true
+    },
+    {
+      "id": "C5",
+      "name": "Orphaned LFN entries",
+      "kernel_tests_passed": 1,
+      "kernel_tests_failed": 0,
+      "kernel_done": true,
+      "fsck_clean": true,
+      "fsck_output": "Clean",
+      "serial_log": [
+        "[FSCKTEST] ChimeraOS FSCK test kernel starting",
+        "[ATA] Slave disk detected",
+        "[FSCK] Starting ChimeraFS consistency check...",
+        "[FSCK] 0 error(s): FAT_mismatch=0 orphan_clus=0 crosslink=0 bad_entry=0 orphan_lfn=0",
+        "[FSCK] 0 errors \ufffd\ufffd\ufffd filesystem is clean",
+        "[FSCKTEST] Filesystem mounted",
+        "[FSCKTEST] Corruption type: 5",
+        "[FSCKTEST] PASS C5 Orphaned LFN: normal.txt readable after repair",
+        "[FSCKTEST] Tests: passed=1 failed=0",
+        "[FSCKTEST] DONE"
+      ],
+      "overall_pass": true
+    }
+  ]
+}

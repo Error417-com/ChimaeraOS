@@ -1,0 +1,7 @@
+timestamp,label,boot_ms,mem_after_boot_bytes,ttfb_ms,tokens_per_sec,mem_after_infer_bytes,net_rtt_ms
+2026-05-16T14:17:48Z,baseline-init,11,1567628,50,1000,1567628,-1
+2026-05-16T14:17:51Z,baseline-init,11,1567628,50,1000,1567628,-1
+2026-05-16T14:17:53Z,baseline-init,11,1567628,50,1000,1567628,-1
+2026-05-16T14:17:55Z,baseline-init,11,1567628,50,1000,1567628,-1
+2026-05-16T14:17:58Z,baseline-init,11,1567628,50,1000,1567628,-1
+2026-05-16T14:18:11Z,baseline-init,11,1567628,50,1000,1567628,-1

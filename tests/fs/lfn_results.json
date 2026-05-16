@@ -1,0 +1,70 @@
+{
+  "kernel_tests_completed": true,
+  "kernel_tests_passed": 12,
+  "kernel_tests_failed": 0,
+  "kernel_test_details": [
+    {
+      "id": "T01",
+      "status": "PASS",
+      "desc": "13-char boundary name create+stat"
+    },
+    {
+      "id": "T02",
+      "status": "PASS",
+      "desc": "14-char name (2 LFN entries)"
+    },
+    {
+      "id": "T03",
+      "status": "PASS",
+      "desc": "26-char name (2 LFN entries boundary)"
+    },
+    {
+      "id": "T04",
+      "status": "PASS",
+      "desc": "100-char name"
+    },
+    {
+      "id": "T05",
+      "status": "PASS",
+      "desc": "250-char name (near max)"
+    },
+    {
+      "id": "T06",
+      "status": "PASS",
+      "desc": "Latin-1 non-ASCII byte roundtrip (0xC3 0xA9)"
+    },
+    {
+      "id": "T07",
+      "status": "PASS",
+      "desc": "deletion+recreation (orphan LFN entries)"
+    },
+    {
+      "id": "T08",
+      "status": "PASS",
+      "desc": "orphan LFN not matched to subsequent 8.3 entry"
+    },
+    {
+      "id": "T09",
+      "status": "PASS",
+      "desc": "delete+recreate same LFN name"
+    },
+    {
+      "id": "T10",
+      "status": "PASS",
+      "desc": "case-insensitive LFN lookup"
+    },
+    {
+      "id": "T11",
+      "status": "PASS",
+      "desc": "short-name collision: both files findable"
+    },
+    {
+      "id": "T12",
+      "status": "PASS",
+      "desc": "LFN entry readable by mtools (host verification)"
+    }
+  ],
+  "fsck_clean": true,
+  "fsck_output": "Clean",
+  "overall_pass": true
+}
