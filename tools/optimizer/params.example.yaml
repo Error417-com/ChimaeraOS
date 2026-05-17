@@ -1,0 +1,63 @@
+# tools/optimizer/params.example.yaml — Example Parameter Specification
+# =======================================================================
+#
+# This YAML file declares the subset of ChimaeraOS parameters eligible for
+# auto-promotion via projected gradient descent. These are parameters whose
+# constraints are a-priori bounded (provably evaluable without running the
+# kernel on real traffic).
+#
+# Included parameters:
+#   - cache_ttl_sec: Cache time-to-live in seconds (bounded integer)
+#   - retry_backoff_coeff: Exponential backoff coefficient (bounded float)
+#
+# Explicitly excluded (per constitution):
+#   - Internal planner heuristics (irreducibly empirical, gated/human path only)
+#   - Logging verbosity (immutable exclusion)
+#
+# Each parameter declaration:
+#   name:         Unique identifier
+#   type:         "int" or "float"
+#   bounds:       [lo, hi] inclusive constitutional hard limits
+#   default:      Initial value (must be within bounds)
+#   build_key:    Kernel build-config key (e.g., CONFIG_CACHE_TTL_SEC)
+#   objective:    "minimize" or "maximize"
+#   metric_name:  [METRICS] key emitted by kernel for this parameter's effect
+#
+# Safety note: The box bounds are inputs to the optimizer, not things it may
+# alter. Projection ensures every candidate is inside these bounds BEFORE
+# build/eval — an out-of-box point is unrepresentable, not rejected post-hoc.
+
+metadata:
+  version: "1.0"
+  description: "Example parameter spec for ChimaeraOS bounded auto-promote"
+  created: "2024-01-01"
+  author: "ChimaeraOS Optimizer Team"
+
+parameters:
+  # Cache TTL: affects cache hit/miss ratio, measurable via synthetic workload
+  - name: cache_ttl_sec
+    type: int
+    bounds: [1, 3600]          # Constitutional limits: 1 second to 1 hour
+    default: 60                 # Start at 1 minute
+    build_key: CONFIG_CACHE_TTL_SEC
+    objective: minimize         # Lower miss rate is better
+    metric_name: cache_miss_rate
+
+  # Retry backoff coefficient: affects retry latency under contention
+  - name: retry_backoff_coeff
+    type: float
+    bounds: [1.0, 10.0]         # Constitutional limits for stability
+    default: 2.0                # Standard exponential backoff
+    build_key: CONFIG_RETRY_BACKOFF_COEFF
+    objective: minimize         # Lower retry latency is better
+    metric_name: avg_retry_latency_ms
+
+  # Optional: bounded memory tuning parameter
+  # Uncomment when ready to include in optimization
+  # - name: buffer_pool_size_kb
+  #   type: int
+  #   bounds: [64, 4096]        # 64 KB to 4 MB
+  #   default: 512              # Start at 512 KB
+  #   build_key: CONFIG_BUFFER_POOL_SIZE_KB
+  #   objective: minimize       # Lower memory usage with acceptable performance
+  #   metric_name: mem_after_boot_bytes
